@@ -9,12 +9,15 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 app.use(bodyParser.json({ strict: false }));
 // Create User endpoint
 app.post('/users', function (req, res) {
-  const { userId, name } = req.body;
+  const { userId, name, reflen, primary, secondary } = req.body;
 const params = {
     TableName: USERS_TABLE,
     Item: {
       userId: userId,
       name: name,
+      reflen: reflen,
+      primary: primary,
+      secondary: secondary
     },
   };
 dynamoDb.put(params, (error) => {
