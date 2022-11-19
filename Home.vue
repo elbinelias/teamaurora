@@ -78,6 +78,12 @@
                 Delete
               </button>
               <h5 class="card-title">{{ item.title }}</h5>
+              <label class="form-label"><b>End-to-End ID:</b>{{ item.endtoendID }}</label> &nbsp;&nbsp; <label class="form-label"><b>System Reference:</b>{{ item.gcpID}}</label> &nbsp;&nbsp; <label class="form-label" id="showStatus"><b>Status:</b>{{ item.status}}</label>
+              <br>
+              <label class="form-label"><b>Additional Info:</b>{{ item.remittanceInfo}}</label>
+              <br>
+              <label><b>Client Reference:</b>{{ item.clientref}}</label> &nbsp;&nbsp; <label><b>Amount:</b>{{ item.amt}}</label>
+              <br>
               <small class="text-secondary"
                 >Searched on: {{ item.createdAt }}</small
               >
@@ -98,6 +104,10 @@
                   {{ item.progress }}
                 </div>
               </div>
+              <div class="text-secondary mb-2">
+                <button @click="getTaskById(item.id)" class="btn btn-outline-secondary float-left">
+                  Refresh
+                </button>
                <div class="text-secondary mb-2" v-if="item.upload" href="#" style="display: none;">
                 1 attachment
               </div>
@@ -111,6 +121,7 @@
                   Upload
                 </button>
               </div>
+              
               <small v-if="item.labels" class="text-secondary"
                 >Detected labels:</small
               >
@@ -126,7 +137,6 @@
     </div>
   </main>
 </template>
-
 <script>
 import Vue from "vue";
 import axios from "axios";
@@ -212,6 +222,23 @@ export default {
           this.error = `Error getting tasks: ${err.message}`;
         });
       this.loading = false;
+    },
+    async getTaskById(id) {
+      id = id.split("#")[1];
+      console.log(`Getting task ${id}`);
+      this.error = "";
+      let token = getAuthToken();
+      await axios
+        .get(`/tasks/${id}`, {headers: { Authorization: `Bearer ${token}` },
+        })
+        .then(() => {
+          console.log(`Got task ${id}`);
+        })
+        .catch((err) => {
+          console.log(err);
+          this.error = `Error getting task: ${err.message}`;
+        });
+        await this.getTasks();
     },
     fileChanged(e) {
       var files = e.target.files || e.dataTransfer.files;
