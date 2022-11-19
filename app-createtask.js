@@ -15,11 +15,13 @@ exports.handler = async (event) => {
   const title = body.title
   const bodyText = 'hidden not filled'
   const createdAt = new Date().toISOString()
-  const amt = '0'
-  const remittanceInfo = 'remittanceInfo'
-  const endtoendID = 'endtoendID'
-  const gcpID = 'gcpID'
-  const status = 'status'
+  const amt = ' '
+  const remittanceInfo = ' '
+  const endtoendID = ' '
+  const gcpID = ' '
+  const status = ' '
+  const clientref = ' '
+  const futurefield = ' '
 
   let dueDate = null
 
@@ -27,11 +29,11 @@ exports.handler = async (event) => {
     dueDate = body.dueDate
   }
   
-  dueDate = '2022-11-18'
+  dueDate = '2022-11-17'
 
   const params = {
     TableName: tableName,
-    Item: { user: `user#${user}`, id: `task#${id}`, title: title, body: bodyText, dueDate: dueDate, createdAt: createdAt, amt: amt, remittanceInfo: remittanceInfo, endtoendID: endtoendID, gcpID: gcpID, status: status }
+    Item: { user: `user#${user}`, id: `task#${id}`, title: title, body: bodyText, dueDate: dueDate, createdAt: createdAt, amt: amt, remittanceInfo: remittanceInfo, endtoendID: endtoendID, gcpID: gcpID, status: status, clientref: clientref, futurefield: futurefield }
   }
 
   console.info(`Writing data to table ${tableName}`)
