@@ -1,7 +1,7 @@
-curl -X POST "https://xwgl7oc7n4.execute-api.ap-southeast-2.amazonaws.com/dev/users" -d '{"userId":"30","name"
-:"Mary","reflen":"30","primary":"bifast","secondary":"gcp"}' -H "Content-Type: application/json"
+curl -X POST "https://826pl6hn97.execute-api.ap-southeast-2.amazonaws.com/dev/rule" -d '{"userId":"9","name":"michelerisa","reflen":"9","primary":"gcp","secondary":"bifast"}' -H "Content-Type: application/json"
 
-curl -X POST "https://xwgl7oc7n4.execute-api.ap-southeast-2.amazonaws.com/dev/users" -d '{"userId":"9","name"
-:"Mary","reflen":"9","primary":"gcp","secondary":"bifast"}' -H "Content-Type: application/json"
-   
-curl -X GET "https://xwgl7oc7n4.execute-api.ap-southeast-2.amazonaws.com/dev/users/9" -H "Content-Type: application/json" 
+curl -X POST "https://826pl6hn97.execute-api.ap-southeast-2.amazonaws.com/dev/rule" -d '{"userId":"30","name":"michelerisa","reflen":"30","primary":"bifast","secondary":"gcp"}' -H "Content-Type: application/json"
+
+curl -X GET "https://826pl6hn97.execute-api.ap-southeast-2.amazonaws.com/dev/rule/9" -H "Content-Type: application/json"
+
+curl -X GET "https://826pl6hn97.execute-api.ap-southeast-2.amazonaws.com/dev/rule/30" -H "Content-Type: application/json"
