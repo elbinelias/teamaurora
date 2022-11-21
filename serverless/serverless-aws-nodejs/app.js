@@ -8,7 +8,7 @@ const USERS_TABLE = process.env.USERS_TABLE;
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 app.use(bodyParser.json({ strict: false }));
 // Create User endpoint
-app.post('/users', function (req, res) {
+app.post('/rule', function (req, res) {
   const { userId, name, reflen, primary, secondary } = req.body;
 const params = {
     TableName: USERS_TABLE,
@@ -23,13 +23,13 @@ const params = {
 dynamoDb.put(params, (error) => {
     if (error) {
       console.log(error);
-      res.status(400).json({ error: `Could not create user ${userId}` });
+      res.status(400).json({ error: `Could not create rule ${userId}` });
     }
     res.json({ userId, name });
   });
 })
 // Get User endpoint
-app.get('/users/:userId', function (req, res) {
+app.get('/rule/:userId', function (req, res) {
   const params = {
     TableName: USERS_TABLE,
     Key: {
@@ -39,13 +39,13 @@ app.get('/users/:userId', function (req, res) {
 dynamoDb.get(params, (error, result) => {
     if (error) {
       console.log(error);
-      res.status(400).json({ error: `Could not get user ${userId}` });
+      res.status(400).json({ error: `Could not get rule ${userId}` });
     }
     if (result.Item) {
-      const {userId, name} = result.Item;
-      res.json({ userId, name });
+      const {userId, name, reflen, primary, secondary} = result.Item;
+      res.json({ userId, primary, secondary });
     } else {
-      res.status(404).json({ error: `User ${userId} not found` });
+      res.status(404).json({ error: `Rule ${userId} not found` });
     }
   });
 })

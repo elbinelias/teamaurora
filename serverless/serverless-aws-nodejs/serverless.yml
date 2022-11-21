@@ -1,6 +1,6 @@
-service: serverless-aws-nodejs-dynamodb
+service: serverless-rul-nodejs-dynamodb
 custom:
-  tableName: 'myusers-table-${self:provider.stage}'
+  tableName: 'rule-table-${self:provider.stage}'
 provider:
   name: aws 
   runtime: nodejs16.x
